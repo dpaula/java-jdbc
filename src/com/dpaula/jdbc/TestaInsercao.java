@@ -4,6 +4,7 @@
 package com.dpaula.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,16 +21,25 @@ public class TestaInsercao {
 	 */
 	public static void main(String[] args) throws SQLException {
 
-		try (Connection conn = Database.getConnection(); Statement st = conn.createStatement();) {
+		try (Connection conn = Database.getConnection();) {
+
+			String nome = "Xadrez'";
+			String desc = "Jogo de Xadrez";
 
 			// retorna true somente caso retorne alguma lista de consulta, neste caso não
 			// tem retorno
-			boolean resultado = st.execute("insert into produto (nome, descricao) values ('Cubo', 'Cubo Magico')",
-					Statement.RETURN_GENERATED_KEYS);// gera o id de cada execução, podendo trazer na consulta depois
+			String sql = "insert into produto (nome, descricao) values (?, ?)";
 
+			// gera o id de cada execução, podendo trazer na consulta depois// gera o id de
+			// cada execução, podendo trazer na consulta depois
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, nome);
+			ps.setString(2, desc);
+
+			boolean resultado = ps.execute();
 			System.out.println(resultado);
 
-			ResultSet rs = st.getGeneratedKeys();
+			ResultSet rs = ps.getGeneratedKeys();
 
 			while (rs.next()) {
 				// pega o id que foi gerado no insert

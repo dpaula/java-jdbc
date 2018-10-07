@@ -21,7 +21,7 @@ public class TestaRemocao {
 
 		try (Connection conn = Database.getConnection(); Statement st = conn.createStatement();) {
 
-			st.execute("delete from produto where id > 3");
+			st.execute("delete from produto where id > 7");
 			// traz a quantidade de linhas excluidas
 			int linhasAtualizadas = st.getUpdateCount();
 
