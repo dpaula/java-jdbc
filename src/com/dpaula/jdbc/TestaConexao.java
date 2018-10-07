@@ -1,7 +1,6 @@
 package com.dpaula.jdbc;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,8 +19,7 @@ public class TestaConexao {
 		// definição de um try:
 
 		// cria a conexão e o statement
-		try (Connection connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/loja-virtual", "SA", "");
-				Statement st = connection.createStatement();) {
+		try (Connection connection = Database.getConnection(); Statement st = connection.createStatement();) {
 
 			System.out.println("Abrindo uma conexão");
 
