@@ -21,7 +21,7 @@ public class TestaInsercao {
 	 */
 	public static void main(String[] args) throws SQLException {
 
-		try (Connection conn = new Database().getConnection();) {
+		try (Connection conn = new ConnectionPool().getConnection();) {
 
 			// por padrão o commit é true, então colocamos para false para controlar cada
 			// execução

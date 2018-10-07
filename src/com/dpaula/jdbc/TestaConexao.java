@@ -19,7 +19,7 @@ public class TestaConexao {
 		// definição de um try:
 
 		// cria a conexão e o statement
-		Database database = new Database();
+		ConnectionPool database = new ConnectionPool();
 
 		for (int i = 0; i < 100; i++) {
 			try (Connection connection = database.getConnection(); Statement st = connection.createStatement();) {

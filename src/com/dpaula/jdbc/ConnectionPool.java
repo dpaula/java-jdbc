@@ -14,11 +14,11 @@ import org.hsqldb.jdbc.JDBCPool;
  * @author ferna
  *
  */
-public class Database {
+public class ConnectionPool {
 
 	private DataSource dataSource;
 
-	Database() {
+	public ConnectionPool() {
 
 		// criando um pool de conexões para o dataSource controlar as conexões
 		JDBCPool pool = new JDBCPool();
@@ -28,7 +28,7 @@ public class Database {
 		this.dataSource = pool;
 	}
 
-	Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {
 		// return
 		// DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/loja-virtual",
 		// "SA", "");
