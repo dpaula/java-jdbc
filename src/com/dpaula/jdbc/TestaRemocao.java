@@ -19,7 +19,7 @@ public class TestaRemocao {
 	 */
 	public static void main(String[] args) throws SQLException {
 
-		try (Connection conn = Database.getConnection(); Statement st = conn.createStatement();) {
+		try (Connection conn = new Database().getConnection(); Statement st = conn.createStatement();) {
 
 			st.execute("delete from produto where id > 7");
 			// traz a quantidade de linhas excluidas

@@ -19,28 +19,32 @@ public class TestaConexao {
 		// definição de um try:
 
 		// cria a conexão e o statement
-		try (Connection connection = Database.getConnection(); Statement st = connection.createStatement();) {
+		Database database = new Database();
 
-			System.out.println("Abrindo uma conexão");
+		for (int i = 0; i < 100; i++) {
+			try (Connection connection = database.getConnection(); Statement st = connection.createStatement();) {
 
-			// imprime se tem conteudo
-			System.out.println(st.execute("select * from produto"));
+				System.out.println("Abrindo uma conexão");
 
-			// cria o resultset
-			try (ResultSet resultado = st.getResultSet();) {
+				// imprime se tem conteudo
+				System.out.println(st.execute("select * from produto"));
 
-				// enquanto tiver linha o resultado ele le
-				while (resultado.next()) {
-					System.out.println();
-					int id = resultado.getInt("id");
-					System.out.println(id);
+				// cria o resultset
+				try (ResultSet resultado = st.getResultSet();) {
 
-					String nome = resultado.getString("nome");
-					System.out.println(nome);
+					// enquanto tiver linha o resultado ele le
+					while (resultado.next()) {
+						System.out.println();
+						int id = resultado.getInt("id");
+						System.out.println(id);
 
-					String desc = resultado.getString("descricao");
-					System.out.println(desc);
+						String nome = resultado.getString("nome");
+						System.out.println(nome);
 
+						String desc = resultado.getString("descricao");
+						System.out.println(desc);
+
+					}
 				}
 			}
 		}
